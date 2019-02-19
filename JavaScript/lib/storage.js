@@ -32,7 +32,7 @@ const storage = {
         if (typeof value === 'object') val = JSON.stringify(val);
         storage.setItem(key, val);
     },
-    remove(key, isSession = true) {
+    del(key, isSession = true) {
         const storage = getStorage(isSession);
         storage.removeItem(key);
     },
