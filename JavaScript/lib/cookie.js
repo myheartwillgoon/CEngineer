@@ -7,10 +7,9 @@ const cookie = {
             let t = options.expires = new Date();
             t.setMilliseconds(t.getMilliseconds() + days * 864e+5);
         }
-
-        document.cookie = [
+       return  document.cookie = [
             `${name}=${value}`,
-            options.expires ? `; expires=${t.toUTCString()}` : '',
+            options.expires ? `; expires=${options.expires.toUTCString()}` : '',
             options.path ? `; path=${options.path}` : '',
             options.domain ? `; domain=${options.domain}` : '',
             options.secure ? `; secure` : '',
@@ -18,10 +17,10 @@ const cookie = {
     },
     get(name, env = '') {
         if (name && env) name = `${env}_${name}`;
-        const cookie = document.cookies ? document.cookie.split('; ') : [];
+        const cookies = document.cookie ? document.cookie.split('; ') : [];
         const len = cookies.length;
         let ret = name ? '' : Object.create(null);
-        for (let i; i < len; i++) {
+        for (let i=0; i < len; i++) {
             const [key, value] = cookies[i].split('=');
             if (key === name) {
                 ret = value;
